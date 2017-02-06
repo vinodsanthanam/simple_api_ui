@@ -3,8 +3,24 @@
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/vendor/jquery/jquery.js"></script>
     <script src="scripts/index.js"></script>
+    <script language="javascript">
+
+    function getdatetime(){
+        $.ajax({
+          url: "http://localhost:8081/datetime",
+          type: "GET"
+        })
+        .done(function( data ) {
+          $("#msgtxt").html(data);
+        })
+        .fail(function( xhr, status, errorThrown ) {
+          $("#msgtxt").html("There was a problem getting date time ");
+        });
+    }
+    </script>
   </head>
   <body>
-    Hello World
+    <div id="msgtxt"></div>
+    <button onclick="getdatetime();">Date Time</button>
   </body>
 </html>
