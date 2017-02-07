@@ -8,7 +8,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, '/public/views'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.set('port', (process.env.npm_package_config_port || 5000));
+app.set('port', (process.env.npm_package_config_port));
 app.set('view engine', 'pug');
 app.set('view options', {environment: process.env.npm_package_config_environment || "dev"});
 
