@@ -1,6 +1,8 @@
-echo "Usage: ./go"
-echo "./go to run the api on local box"
-echo "./go -docker to run the api on a docker container"
+#!/bin/bash
+
+echo "Usage:"
+echo "./go -- to run the api on local box"
+echo "./go -docker -- to run the api on a docker container on port 8082"
 
 npm install
 

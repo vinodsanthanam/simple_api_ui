@@ -1,17 +1,27 @@
 #!/bin/bash
+echo "Usage:"
+echo "./go -watch -- to watch for files"
+echo "./go -start port -- to start local server for specific environment, defaults to dev"
+echo "./go -docker -- to run the app in docker container on port 5000"
+echo ""
 
 npm install
 bower install
 rm -rf public
 ./node_modules/.bin/grunt 
 
-if [ "$1" = "watch" ]; then
+if [ "$1" = "-watch" ]; then
   ./node_modules/.bin/grunt watch
-elif [ "$1" = "start" ]; then
+elif [ "$1" = "-start" ]; then
     if [ "$2" != "" ]; then
       npm config set ui:environment $2
     else
       npm config set ui:environment dev
     fi
     npm start
+fi
+
+if [ "$1" = "-docker" ]; then
+  docker build -t vinodsanthanam/ui .
+  docker run -p 5000:5000 -d vinodsanthanam/ui 
 fi
