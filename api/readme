@@ -1,0 +1,7 @@
+// To run in docker
+// build an image
+docker build -t vinodsanthanam/api .
+// run the image in a container as a daemon, expose the port to the host
+docker run -p 8083:8083 -d vinodsanthanam/api
+// test the end point
+curl http://localhost:8083/datetime
