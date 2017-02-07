@@ -28,7 +28,8 @@ module.exports = function(grunt) {
         },
         files: {
           'public/scripts' : 'scripts',
-          'public': 'view'
+          'public/views': 'views',
+          'public/config': 'config'
         }
       },
 
@@ -48,10 +49,10 @@ module.exports = function(grunt) {
                                       
     watch: {
       css: {
-        files: 'scss/**/*.scss', tasks: ['sass']
+        files: 'src/scss/**/*.scss', tasks: ['sass']
       },
       src: {
-        files: ['src/scripts/**/*.*', 'src/view/**/*.*'],
+        files: ['src/scripts/**/*.*', 'src/views/**/*.*', 'src/html/**/*.*', 'src/config/**/*.*'],
         tasks: ['jshint', 'bowercopy']                 
       }
     }
