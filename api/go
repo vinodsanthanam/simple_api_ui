@@ -1,8 +1,21 @@
+echo "Usage: ./go"
+echo "./go to run the api on local box"
+echo "./go -docker to run the api on a docker container"
+
 npm install
 
-if [ "$1" != "" ]; then
+if [ "$1" != "" ] && [ "$1" != "-docker" ]; then
   npm config set api:port $1
 else
   npm config set api:port 8081 
 fi
-npm start
+
+if [ "$1" = "-docker" ]; then
+  docker build -t vinodsanthanam/api .
+  docker run -p 8082:8082 -d vinodsanthanam/api
+  sleep 2
+  curl http://localhost:8082/datetime
+  echo ""
+else
+  npm start
+fi

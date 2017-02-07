@@ -4,5 +4,5 @@ RUN mkdir -p /usr/app
 WORKDIR  /usr/app
 
 COPY . /usr/app/
-RUN npm config set api:port 8083
+RUN npm config set api:port 8082
 CMD ["npm", "start"] 
