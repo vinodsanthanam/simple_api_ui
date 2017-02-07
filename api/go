@@ -1,2 +1,8 @@
 npm install
+
+if [ "$1" != "" ]; then
+  npm config set api:port $1
+else
+  npm config set api:port 8081 
+fi
 npm start

@@ -1,5 +1,17 @@
+#!/bin/bash
+
 npm install
 bower install
 rm -rf public
 ./node_modules/.bin/grunt 
-./node_modules/.bin/grunt watch
+
+if [ "$1" = "watch" ]; then
+  ./node_modules/.bin/grunt watch
+elif [ "$1" = "start" ]; then
+    if [ "$2" != "" ]; then
+      npm config set ui:environment $2
+    else
+      npm config set ui:environment dev
+    fi
+    npm start
+fi
