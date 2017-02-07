@@ -1,5 +1,6 @@
 {
-  "main": "server.js",
+  "name": "api",
+  "config" : {"port" : "8082"},
   "scripts": {
     "start": "node server.js"
   },

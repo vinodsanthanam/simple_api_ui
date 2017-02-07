@@ -13,12 +13,13 @@ var allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 app.use(express.static(__dirname + '/public'));
+app.set('port', (process.env.npm_package_config_port || "8081"));
 
 app.get('/datetime', function (req, res) {
   res.end(new Date().toString());
 })
 
-var server = app.listen(8081, function () {
+var server = app.listen(app.get('port'), function () {
 
     var host = server.address().address
     var port = server.address().port
