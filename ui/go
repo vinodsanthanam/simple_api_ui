@@ -14,14 +14,15 @@ if [ "$1" = "-watch" ]; then
   ./node_modules/.bin/grunt watch
 elif [ "$1" = "-start" ]; then
     if [ "$2" != "" ]; then
-      npm config set ui:environment $2
+      export ui_environment=$2
     else
-      npm config set ui:environment dev
+      export ui_environment=dev
     fi
+    export ui_port=5001
     npm start
 fi
 
 if [ "$1" = "-docker" ]; then
   docker build -t vinodsanthanam/ui .
-  docker run -p 5000:5000 -d vinodsanthanam/ui 
+  docker run -p 5000:5000 --env ui_port=5000 --env ui_environment=docker-dev -d vinodsanthanam/ui 
 fi

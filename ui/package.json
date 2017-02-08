@@ -1,6 +1,5 @@
 {
   "name": "ui",
-  "config" : { "port" : "5001", "environment" : "dev" },
   "scripts": {
     "start": "node server.js"
   },
