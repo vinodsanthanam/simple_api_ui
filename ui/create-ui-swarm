@@ -1,5 +1,5 @@
 #!/bin/bash
-
+SECONDS=0;
 # https://botleg.com/stories/load-balancing-with-docker-swarm/
 
 # create consul for storing kv pairs for the swarm
@@ -12,8 +12,21 @@ docker run -d -p ${UI_KV_IP}:8500:8500 -h ui-consul --restart always gliderlabs/
 
 #create master node
 docker-machine create --driver virtualbox --swarm --swarm-master --swarm-discovery="consul://${UI_KV_IP}:8500" --engine-opt="cluster-store=consul://${UI_KV_IP}:8500" --engine-opt="cluster-advertise=eth1:2376" ui-master
+export UI_MASTER_IP=$(docker-machine ssh ui-master 'ifconfig eth1 | grep "inet addr:" | cut -d: -f2 | cut -d" " -f1')
+
+
 # create slave node
 docker-machine create --driver virtualbox --swarm --swarm-discovery="consul://${UI_KV_IP}:8500" --engine-opt="cluster-store=consul://${UI_KV_IP}:8500" --engine-opt="cluster-advertise=eth1:2376" ui-slave 
+export UI_SLAVE_IP=$(docker-machine ssh ui-slave 'ifconfig eth1 | grep "inet addr:" | cut -d: -f2 | cut -d" " -f1')
+
+# setup registrator in master and slave nodes for it to register the ports and ip address with consul so that nginx can read the information from consul
+# setup registrator in master
+eval $(docker-machine env ui-master)
+docker run -d --name=registrator -h ${UI_MASTER_IP} --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest -ip ${UI_MASTER_IP} consul://${UI_KV_IP}:8500
+
+# setup registrator in slave
+eval $(docker-machine env ui-slave)
+docker run -d --name=registrator -h ${UI_SLAVE_IP} --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest -ip ${UI_MASTER_API} consul://${UI_KV_IP}:8500
 
 # change context to docker-machine
 eval $(docker-machine env -swarm ui-master)
@@ -29,3 +42,6 @@ docker-compose scale ui=4
 
 # list all the docker containers
 docker-compose ps
+
+duration=$SECONDS
+echo "Time taken to finish creating the swarm $(($duration / 60)) minutes and $(($duration % 60)) "
