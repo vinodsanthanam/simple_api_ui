@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# https://botleg.com/stories/load-balancing-with-docker-swarm/
+
+# create consul for storing kv pairs for the swarm
+docker-machine create --driver virtualbox ui-consul
+
+export UI_KV_IP=$( docker-machine ip ui-consul)
+
+eval $(docker-machine env ui-consul)
+docker run -d -p ${UI_KV_IP}:8500:8500 -h ui-consul --restart always gliderlabs/consul-server -bootstrap
+
+#create master node
+docker-machine create --driver virtualbox --swarm --swarm-master --swarm-discovery="consul://${UI_KV_IP}:8500" --engine-opt="cluster-store=consul://${UI_KV_IP}:8500" --engine-opt="cluster-advertise=eth1:2376" ui-master
+# create slave node
+docker-machine create --driver virtualbox --swarm --swarm-discovery="consul://${UI_KV_IP}:8500" --engine-opt="cluster-store=consul://${UI_KV_IP}:8500" --engine-opt="cluster-advertise=eth1:2376" ui-slave 
+
+# change context to docker-machine
+eval $(docker-machine env -swarm ui-master)
+
+# list all the docker containers
+docker-compose ps
+
+# creates the containers based on the docker-compose.yml file
+docker-compose up -d
+
+#scale the number of nodes running api to 4
+docker-compose scale ui=4
+
+# list all the docker containers
+docker-compose ps

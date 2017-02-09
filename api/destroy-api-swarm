@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker-machine rm -f api-consul
+docker-machine rm -f api-master
+docker-machine rm -f api-slave

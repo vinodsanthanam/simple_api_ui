@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  ui:
+    image: vinodsanthanam/ui 
+    ports:
+      - "5001"
+    environment:
+      - ui_port=5001
+      - ui_environment=docker-dev
+    networks:
+      - back-tier
+
+networks:
+  back-tier:
+    driver: overlay

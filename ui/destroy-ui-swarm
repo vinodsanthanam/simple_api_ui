@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker-machine rm -f ui-consul
+docker-machine rm -f ui-master
+docker-machine rm -f ui-slave
