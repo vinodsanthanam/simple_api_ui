@@ -26,3 +26,9 @@ if [ "$1" = "-docker" ]; then
   docker build -t vinodsanthanam/ui .
   docker run -p 5000:5000 --env port=5000 --env api_base_url="http://192.168.99.128" -d vinodsanthanam/ui 
 fi
+
+if [ "$1" = "-tag" ]; then
+  docker build -t vinodsanthanam/ui .
+  docker tag vinodsanthanam/ui vinodsanthanam/ui:2
+  docker push vinodsanthanam/ui
+fi

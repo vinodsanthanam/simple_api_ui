@@ -28,8 +28,7 @@ module.exports = function(grunt) {
         },
         files: {
           'public/scripts' : 'scripts',
-          'public/views': 'views',
-          'public/config': 'config'
+          'public/views': 'views'
         }
       },
 
