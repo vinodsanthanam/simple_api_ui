@@ -14,16 +14,15 @@ if [ "$1" = "-watch" ]; then
   ./node_modules/.bin/grunt watch
 elif [ "$1" = "-start" ]; then
     if [ "$2" != "" ]; then
-      export ui_environment=$2
+      export api_base_url=$2
     else
-      export ui_environment=dev
+      export api_base_url="http://localhost:8081"
     fi
-    export ui_port=5001
+    export port=5001
     npm start
 fi
 
 if [ "$1" = "-docker" ]; then
   docker build -t vinodsanthanam/ui .
-  docker run -p 5000:5000 --env ui_port=5000 --env ui_environment=docker-dev -d vinodsanthanam/ui 
-  docker push vinodsanthanam/ui
+  docker run -p 5000:5000 --env port=5000 --env api_base_url="http://192.168.99.128" -d vinodsanthanam/ui 
 fi

@@ -6,8 +6,8 @@ services:
     ports:
       - "5001"
     environment:
-      - ui_port=5001
-      - ui_environment=docker-swarm-dev
+      - port=5001
+      - api_base_url=http://192.168.99.128 
     networks:
       - back-tier
   ui_lb:

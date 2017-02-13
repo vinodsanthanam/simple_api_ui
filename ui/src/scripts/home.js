@@ -1,7 +1,7 @@
 /* index scripts */
     function getdatetime(){
         $.ajax({
-          url: config.api_url,
+          url: api_base_url+"/datetime",
           type: "GET"
         })
         .done(function( data ) {
