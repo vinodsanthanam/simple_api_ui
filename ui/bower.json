@@ -2,6 +2,7 @@
   "name": "ui",
   "dependencies": {
     "jquery": "latest",
+    "underscore" : "latest",
     "normalize-css": "latest"
   }
 }

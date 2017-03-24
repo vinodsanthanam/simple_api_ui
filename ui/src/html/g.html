@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/vendor/jquery/jquery.js"></script>
+
+    <style>
+body {
+  box-sizing: border-box;
+}
+    .boxwithoutwidth {
+      border: 1px solid;
+        border-background=black;
+      display: inline;
+      padding: 2%;
+      margin: 1%;
+      text-align: center;
+    }
+    .box {
+      border: 1px solid;
+      border-color: antiquewhite;
+      display: inline-block;
+      margin: 1px;
+      padding: 2%;
+      text-align: center;
+      background-color: slategray;  
+    }
+    .container {
+      word-spacing: -7;
+      margin-bottom: -7;
+    }
+    .grid {
+      padding: 5%;
+    }
+    .break {
+      display: inline-block;
+      width: 30%;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <div class="container">
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="break"></div>
+      </div>
+
+      <div class="container">
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="break"></div>
+      </div>
+    </div>
+    <script>
+    var container = $('<div></div>');
+    $(".grid").append(container);
+    $(container).addClass("container");
+    $(container).append("<div class=\"box\"> </div>");
+    </script>
+  </body>
+</html>

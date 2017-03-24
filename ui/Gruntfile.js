@@ -28,6 +28,7 @@ module.exports = function(grunt) {
         },
         files: {
           'public/scripts' : 'scripts',
+          'public' : 'html',
           'public/views': 'views'
         }
       },
@@ -41,7 +42,8 @@ module.exports = function(grunt) {
           destPrefix: 'public/scripts/vendor'
         },
         files: {
-          'jquery/jquery.js': 'jquery/dist/jquery.min.js'
+          'jquery/jquery.js': 'jquery/dist/jquery.min.js',
+          'underscore/underscore.js': 'underscore/underscore-min.js'
         }
       }
     },
