@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
+var ip = require("ip");
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
@@ -16,7 +17,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('port', (process.env.api_port));
 
 app.get('/datetime', function (req, res) {
-  res.end(new Date().toString());
+  res.end(new Date().toString() + " Also my ip is :- " + ip.address());
 })
 
 var server = app.listen(app.get('port'), function () {
