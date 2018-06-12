@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var pg = require('pg');
 var path = require('path');
+var ip = require('ip');
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, '/public/views'));
@@ -18,7 +19,7 @@ app.use(function(req, res, next){
 });
 
 app.get('/', function(request, response) {
-  response.render('home', { title: 'Hey', message: 'Hello there' });
+  response.render('home', { title: 'Hey', message: 'Hello there My IP Addr is :- '+ ip.address() });
 });
 
 

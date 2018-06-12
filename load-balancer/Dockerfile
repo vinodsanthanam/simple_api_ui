@@ -11,4 +11,5 @@ ADD https://releases.hashicorp.com/consul-template/0.12.2/consul-template_0.12.2
 RUN unzip /usr/bin/consul-template_0.12.2_linux_amd64.zip -d /usr/local/bin
 
 EXPOSE 80
+EXPOSE 8500
 ENTRYPOINT ["/bin/start.sh"]

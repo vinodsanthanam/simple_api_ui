@@ -4,16 +4,17 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.13.3",
-    "pg": "4.5.3",
-    "body-parser": "~1.12.4",
-    "pug": "latest",
     "grunt": "latest",
-    "grunt-sass": "latest",
-    "grunt-contrib-watch": "latest",
     "grunt-bowercopy": "latest",
+    "grunt-cli": "latest",
     "grunt-contrib-jshint": "latest",
-    "grunt-cli": "latest"
+    "grunt-contrib-watch": "latest",
+    "grunt-sass": "latest",
+    "pg": "4.5.3",
+    "pug": "latest",
+    "ip": "latest"
   },
   "engines": {
     "node": "4.0.0"
