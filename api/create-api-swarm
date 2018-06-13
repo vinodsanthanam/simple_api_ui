@@ -25,7 +25,7 @@ docker run -d --name=registrator -h ${API_MASTER_IP} --volume=/var/run/docker.so
 
 # setup registrator in slave
 eval $(docker-machine env api-slave)
-docker run -d --name=registrator -h ${API_SLAVE_IP} --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest -ip ${API_MASTER_IP} consul://${API_KV_IP}:8500
+docker run -d --name=registrator -h ${API_SLAVE_IP} --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest -ip ${API_SLAVE_IP} consul://${API_KV_IP}:8500
 
 
 # change context to docker-machine in swarm mode
