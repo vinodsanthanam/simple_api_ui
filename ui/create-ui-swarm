@@ -26,7 +26,7 @@ docker run -d --name=registrator -h ${UI_MASTER_IP} --volume=/var/run/docker.soc
 
 # setup registrator in slave
 eval $(docker-machine env ui-slave)
-docker run -d --name=registrator -h ${UI_SLAVE_IP} --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest -ip ${UI_MASTER_API} consul://${UI_KV_IP}:8500
+docker run -d --name=registrator -h ${UI_SLAVE_IP} --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest -ip ${UI_SLAVE_IP} consul://${UI_KV_IP}:8500
 
 # change context to docker-machine
 eval $(docker-machine env -swarm ui-master)
